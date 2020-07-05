@@ -1,5 +1,7 @@
-from selenium.webdriver import Chrome,Firefox,Ie
 import pytest
+import os
+from selenium.webdriver import Chrome,Firefox,Ie
+
 
 def get_browser_instance():
     browser_info = pytest.config.option.browser
@@ -10,10 +12,13 @@ def get_browser_instance():
 
     print("Browser name :",browser_info)
 
+    fileDir = os.path.dirname(os.path.abspath(__file__))
+    libDirPath = os.path.dirname(fileDir)
+    comDirPath = os.path.dirname(libDirPath)
     if browser_info.lower()=="chrome":
-        driver = Chrome("G:\Kiran\Softwares\Python\chromedriver\chromedriver.exe")
+        driver = Chrome(comDirPath+"\\Browser_servers\\chrome\\chromedriver.exe")
     elif browser_info.lower()=="firefox":
-        driver = Firefox("com\org\comp\Browser_servers\chrome\chromedriver.exe")
+        driver = Firefox(comDirPath+"\\Browser_servers\\chrome\\chromedriver.exe")
     else:
         print("Invalid Browser , please provide correct one")
         return None

@@ -1,4 +1,6 @@
+import os
 import unittest
+
 from com.org.comp.lib.util import  create_driver
 from com.org.comp.lib.util import timeout_handlers
 from com.org.comp.lib.ui.loginPage import loginPage
@@ -14,7 +16,9 @@ class testloginFunc(unittest.TestCase):
         self.driver.close()
 
     def test_verifyLogin(self):
-        json_data = json.load(open("/PythonProjectFlipkart\\com\\org\\comp\\lib\\sanity\\test_data\\sample_data.json", mode='r'))
+        dirname = os.path.dirname(__file__)
+        print("Parent dir :",dirname)
+        json_data = json.load(open(dirname+"\\test_data\\sample_data.json", mode='r'))
         print("Json data :",json_data)
         self.login.wait_for_login_page_to_load()
         timeout_handlers.wait_element_to_be_visible(self.driver,self.login.get_username_textbox())
